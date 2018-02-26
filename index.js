@@ -109,7 +109,14 @@ express()
     client.search({
       index: 'explr',
       type: 'places',
-      q: 'name:' + query
+      body: {
+        size: 50,
+        query: {
+          match: {
+            name: query
+          }
+        }
+      }
     }, function (error, response) {
       // ...
       res.send(response)
