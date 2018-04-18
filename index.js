@@ -1,4 +1,5 @@
 const express = require('express')
+var cors = require('cors')
 const path = require('path')
 const elasticsearch = require('elasticsearch')
 const firebase = require('firebase')
@@ -56,6 +57,7 @@ var initPlaces = (data, res) => {
 }
 
 express()
+  .use(cors())
   .get('/', (req, res) => res.send('explr'))
 
   // ping cluster for connection testing
