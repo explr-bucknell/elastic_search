@@ -125,4 +125,33 @@ express()
     })
   })
 
+  // search for places used by admin webapp
+  .get('/search_places_admin', (req, res) => {
+    var query = req.query.q
+    var page = req.query.page
+    var size = req.query.size
+    if (!page) {
+      page = 0
+    }
+    if (!size) {
+      size = 10
+    }
+    client.search({
+      index: 'explr',
+      type: 'places',
+      body: {
+        from: page * size,
+        size: size,
+        query: {
+          match: {
+            name: query
+          }
+        }
+      }
+    }, function (error, response) {
+      // ...
+      res.send(response)
+    })
+  })
+
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
