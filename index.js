@@ -37,7 +37,7 @@ var getPlacesData = (callback, res) => {
           }
         })
         data.push({
-          name: decodeURI(poi.val().name),
+          name: decodeURIComponent(poi.val().name),
           id: poi.val().id
         })
       })
